@@ -1,4 +1,4 @@
-export interface cursoInterface {
+export interface CursoInterface {
     id?: string;
     nombre?: string;
     formador?: string;
@@ -6,5 +6,5 @@ export interface cursoInterface {
     idioma?: string;
     tecnologia?: string;
     fecha?: any;
-    description?: string;
+    descripcion?: string;
 }

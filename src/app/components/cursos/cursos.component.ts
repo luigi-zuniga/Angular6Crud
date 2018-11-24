@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { cursoInterface } from '../../models/cursoInterface';
+import { CursoInterface } from '../../models/cursoInterface';
 import { CursoService } from '../../Services/curso.service';
 
 @Component({
@@ -9,12 +9,11 @@ import { CursoService } from '../../Services/curso.service';
 })
 export class CursosComponent implements OnInit {
 
-  constructor(private CursoService: CursoService) { }
+  constructor(private cursoService: CursoService) { }
 
   ngOnInit() {
-      this.CursoService.getCursos().subscribe(cursos => {
+      this.cursoService.getCursos().subscribe(cursos => {
         console.log(cursos);
-      })
+      });
   }
-
 }
