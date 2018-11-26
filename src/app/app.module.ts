@@ -14,7 +14,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { CursosComponent } from './components/cursos/cursos.component';
 import { AddCursosComponent } from './components/add-cursos/add-cursos.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

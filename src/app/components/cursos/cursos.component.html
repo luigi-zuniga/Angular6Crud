@@ -1,38 +1,95 @@
-<ul class="collection with-header">
-    <li class="collection-header"><h5>Cursos</h5></li>
-    <li class="collection-item">
-        <a href="#!" class="secondary-content">
-          <i class="material-icons">mode_edit</i>
-          <i class="material-icons">close</i>
-        </a>
-        <strong>Nombre del Curso</strong>
-        <br>
-        <blockquote>Descripción del curso</blockquote>
-        <br>
-        <span class="my_tag amber">
-          <strong>Precio:</strong>
-          11.75€
-        </span>
+<div *ngIf="cursos?.length > 0; else sinCursos">
+  <ul *ngFor="let curso of cursos"  class="collection with-header">
+      <li class="collection-header">
+        <h5>{{ curso.nombre }}</h5>
+      </li>
+      <li class="collection-item">
+          <a class="secondary-content">
+            <!--Utilizamos la directiva ngIF-->
+            <!--si el estado dado en el componente es falso esta boton si se mostrara-->
+            <!--se añade un evento click que llamara a el metodo editCurso que se da con 2 parametros-->
+            <!--el evento y curso(todas las propiedades)-->
+            <i *ngIf="editState == false" (click)="editCurso($event, curso)" class="material-icons">mode_edit</i>
+            <!--Metodo que setea la propiedad editState a false-->
+            <i *ngIf="editState && cursoToEdit.id == curso.id" (click)="clearState()"  class="material-icons">close</i>
+          </a>
+          <br>
+          <blockquote>{{ curso.descripcion }}</blockquote>
+          <br>
+          <span class="my_tag amber">
+            <strong>Precio:</strong>
+            {{ curso.precio }}
+          </span>
 
-        <span class="my_tag amber">
-          <strong>Idioma:</strong>
-          Español
-        </span>
+          <span class="my_tag amber">
+            <strong>Idioma:</strong>
+            {{ curso.idioma }}
+          </span>
 
-        <span class="my_tag amber">
-          <strong>Formador:</strong>
-          Yo Mismo
-        </span>
+          <span class="my_tag amber">
+            <strong>Formador:</strong>
+            {{ curso.formador }}
+          </span>
 
-        <span class="my_tag amber">
-          <strong>Lenguaje:</strong>
-          PHP
-        </span>
+          <span class="my_tag amber">
+            <strong>Lenguaje:</strong>
+            {{ curso.tecnologia }}
+          </span>
 
-        <hr>
+          <div *ngIf="editState && cursoToEdit.id == curso.id" class="container-updateCurso">
+            <!--Formulario de edicion-->
+            <form (ngSubmit)="onUpdateCurso(curso)" class="row">
+                <div class="col s12">
 
-        <div class="container-updateCurso">
-          <!--Formulario de edicion-->
-        </div>
-    </li>
+                  <div class="input-field col s6">
+                    <input id="nameEdit" [(ngModel)]="curso.nombre" #nombre="ngModel" type="text" name="nombre" class="active">
+                    <label class="active" for="nameEdit">Nombre</label>
+                  </div>
+
+                  <div class="input-field col s6">
+                    <input id="descriptionEdit" [(ngModel)]="curso.descripcion" #descripcion="ngModel" type="text" name="descripcion"
+                      class="validate">
+                      <label class="active" for="descriptionEdit">Descripción</label>
+                  </div>
+
+                  <div class="input-field col s6">
+                    <input id="trainerEdit" [(ngModel)]="curso.formador" #formador="ngModel" type="text" name="formador" class="validate">
+                    <label class="active" for="trainerEdit">Formador</label>
+                  </div>
+
+                  <div class="input-field col s6">
+                    <input id="languageEdit" [(ngModel)]="curso.idioma" #idioma="ngModel" type="text" name="idioma" class="validate">
+                    <label class="active" for="languageEdit">Idioma</label>
+                  </div>
+
+                  <div class="input-field col s6">
+                    <input id="priceEdit" [(ngModel)]="curso.precio" #precio="ngModel" type="text" name="precio" class="validate">
+                    <label class="active" for="priceEdit">Precio</label>
+                  </div>
+
+                  <div class="input-field col s6">
+                    <input id="TechnologyEdit" [(ngModel)]="curso.tecnologia" #tecnologia="ngModel" type="text" name="tecnologia"
+                      class="validate" class="flow-text">
+                    <label class="active" for="TechnologyEdit">Tecnología</label>
+                  </div>
+
+
+                  <div class="col s12">
+                    <button (click)="deleteCurso($event, curso)" class="btn red darken-1 right">Eliminar
+                          <i class="material-icons right">delete_forever</i>
+                     </button>
+                     <button type="submit" class="btn teal accent-3">Actualizar
+                        <i class="material-icons right">save</i>
+                    </button>
+                  </div>
+
+                </div>
+              </form>
+          </div>
+      </li>
   </ul>
+</div>
+<!--Template para mostrar lista vacia en caso de no encontrar cursos a mostrar-->
+<ng-template #sinCursos>
+    <div class="card-panel red darken-1">No Existen Cursos Registrados</div>
+</ng-template>

@@ -36,11 +36,19 @@ export class CursoService {
     this.cursosCollection.add(curso);
   }
 
-  deleteCursos() {
-    console.log('delete Curso');
+  /**Recibimos como parametro la propiedad curso */
+  deleteCurso(curso: CursoInterface) {
+    // console.log('delete Curso');
   }
 
-  updateCursos() {
-    console.log('update Curso');
+
+  updateCurso(curso: CursoInterface) {
+    // console.log('update Curso');
+    /**Para actualizar tenemos que llamar al documento que vamos a actualizar */
+    /**Los template literal no se usan con comillas simples
+     * se debe indicar el nombre de la coleccion y el nombre de la variable
+     */
+    this.cursoDoc = this.afs.doc(`cursos/${curso.id}`);
+    this.cursoDoc.update(curso);
   }
 }
