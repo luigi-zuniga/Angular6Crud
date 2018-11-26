@@ -5,8 +5,12 @@
       <div class="col s12">
 
         <div class="input-field col s6">
-          <input id="name" [(ngModel)]="curso.nombre" #nombre="ngModel" type="text" name="nombre" placeholder="Ingrese nombre" class="validate">
+          <input id="name" [(ngModel)]="curso.nombre" #nombre="ngModel" type="text" name="nombre" placeholder="Ingrese nombre" class="validate" required minlength="8" maxlength="40">
           <label class="active" for="name">Curso</label>
+          <div class="message" *ngIf="nombre.touched && !nombre.valid">
+            <span *ngIf="nombre.errors.required" class="red-text"><i class="material-icons left">error_outline</i> Nombre es requerido</span>
+            <span *ngIf="nombre.errors.minlength" class="red-text"><i class="material-icons left">error_outline</i> Nombre debe tener min {{nombre.errors.minlength.requiredLength}} caracteres</span>
+          </div>
         </div>
 
         <div class="input-field col s6">

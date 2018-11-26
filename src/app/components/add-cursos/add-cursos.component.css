@@ -1,0 +1,8 @@
+.message {
+    overflow:hidden;
+}
+
+.message > span {
+    float:left;
+    margin-left:-1px;
+}
