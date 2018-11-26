@@ -39,6 +39,8 @@ export class CursoService {
   /**Recibimos como parametro la propiedad curso */
   deleteCurso(curso: CursoInterface) {
     // console.log('delete Curso');
+    this.cursoDoc = this.afs.doc(`cursos/${curso.id}`);
+    this.cursoDoc.delete();
   }
 
 

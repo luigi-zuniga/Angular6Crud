@@ -38,6 +38,11 @@ export class CursosComponent implements OnInit {
     this.clearState();
   }
 
+  deleteCurso(event, curso: CursoInterface) {
+    this.cursoService.deleteCurso(curso);
+    this.clearState();
+  } 
+
   clearState() {
     this.editState = false;
     this.cursoToEdit = null;
