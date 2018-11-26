@@ -14,30 +14,50 @@
         </div>
 
         <div class="input-field col s6">
-          <input id="description" [(ngModel)]="curso.descripcion" #descripcion="ngModel" type="text"  placeholder="Ingrese descripcion" name="descripcion"
-            class="validate">
+          <input id="description" [(ngModel)]="curso.descripcion" #descripcion="ngModel" type="text"  placeholder="Ingrese descripcion" name="descripcion" class="validate" required minlength="4" maxlength="120">
           <label class="active"for="description">Descripción</label>
+          <div class="message" *ngIf="descripcion.touched && !descripcion.valid">
+            <span *ngIf="descripcion.errors.required" class="red-text"><i class="material-icons left">error_outline</i> descripcion es requerido</span>
+            <span *ngIf="descripcion.errors.minlength" class="red-text"><i class="material-icons left">error_outline</i> descripcion debe tener min {{descripcion.errors.minlength.requiredLength}} caracteres</span>
+          </div>
         </div>
 
         <div class="input-field col s6">
-          <input id="trainer" [(ngModel)]="curso.formador" #formador="ngModel" type="text" name="formador"  placeholder="Ingrese formador" class="validate">
+          <input id="trainer" [(ngModel)]="curso.formador" #formador="ngModel" type="text" name="formador"  placeholder="Ingrese formador" class="validate" required minlength="4" maxlength="80">
           <label class="active"for="trainer">Formador</label>
+          <div class="message" *ngIf="formador.touched && !formador.valid">
+            <span *ngIf="formador.errors.required" class="red-text"><i class="material-icons left">error_outline</i> formador es requerido</span>
+            <span *ngIf="formador.errors.minlength" class="red-text"><i class="material-icons left">error_outline</i> formador debe tener min {{formador.errors.minlength.requiredLength}} caracteres</span>
+          </div>
         </div>
 
         <div class="input-field col s6">
-          <input id="language" [(ngModel)]="curso.idioma" #idioma="ngModel" type="text" name="idioma"  placeholder="Ingrese idioma" class="validate">
+          <input id="language" [(ngModel)]="curso.idioma" #idioma="ngModel" type="text" name="idioma"  placeholder="Ingrese idioma" class="validate" required minlength="3" maxlength="80" pattern="Inglés|Español">
           <label class="active"for="language">Idioma</label>
+          <div class="message" *ngIf="idioma.touched && !idioma.valid">
+            <span *ngIf="idioma.errors.required" class="red-text"><i class="material-icons left">error_outline</i> idioma es requerido</span>
+            <span *ngIf="idioma.errors.minlength" class="red-text"><i class="material-icons left">error_outline</i> idioma debe tener min {{idioma.errors.minlength.requiredLength}} caracteres</span>
+            <span *ngIf="idioma.errors.pattern" class="red-text"><i class="material-icons left">error_outline</i> Idioma debe ser ingles o español</span>
+          </div>
         </div>
 
         <div class="input-field col s6">
-          <input id="price" [(ngModel)]="curso.precio" #precio="ngModel" type="text" name="precio"  placeholder="Ingrese precio" class="validate">
+          <input id="price" [(ngModel)]="curso.precio" #precio="ngModel" type="text" name="precio"  placeholder="Ingrese precio" class="validate" required minlength="2" maxlength="7">
           <label class="active"for="price">Precio</label>
+          <div class="message" *ngIf="precio.touched && !precio.valid">
+            <span *ngIf="precio.errors.required" class="red-text"><i class="material-icons left">error_outline</i> precio es requerido</span>
+            <span *ngIf="precio.errors.minlength" class="red-text"><i class="material-icons left">error_outline</i> precio debe tener min {{precio.errors.minlength.requiredLength}} caracteres</span>
+          </div>
         </div>
 
         <div class="input-field col s6">
-          <input id="Technology" [(ngModel)]="curso.tecnologia" #tecnologia="ngModel" type="text"  placeholder="Ingrese tecnologia" name="tecnologia"
-            class="validate" class="flow-text">
+          <input id="Technology" [(ngModel)]="curso.tecnologia" #tecnologia="ngModel" type="text"  placeholder="Ingrese tecnologia" name="tecnologia"  required minlength="3" maxlength="80" class="validate"  pattern="Javascript|PHP|Bases de datos|React|CSS|NodeJS|C#|Java|SEO">
           <label class="active" for="Technology">Tecnología</label>
+          <div class="message" *ngIf="tecnologia.touched && !tecnologia.valid">
+            <span *ngIf="tecnologia.errors.required" class="red-text"><i class="material-icons left">error_outline</i> tecnologia es requerido</span>
+            <span *ngIf="tecnologia.errors.minlength" class="red-text"><i class="material-icons left">error_outline</i> tecnologia debe tener min {{tecnologia.errors.minlength.requiredLength}} caracteres</span>
+            <span *ngIf="tecnologia.errors.pattern" class="red-text"><i class="material-icons left">error_outline</i> tecnologia debe ser Javascript, PHP, Bases de datos, React, CSS, NodeJS, C#, Java o SEO</span>
+          </div>
         </div>
 
         <div class="col s12 left">
@@ -49,4 +69,8 @@
       </div>
     </form>
   </div>
+</div>
+
+<div>
+   <h1> {{ $message }}</h1>
 </div>

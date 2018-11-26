@@ -27,12 +27,22 @@ export class AddCursosComponent implements OnInit {
   }
   /** Creacion del metodo para guardar el curso, dandole la directiva del formulario ngForm*/
   onGuardarCurso(myForm: NgForm) {
+    /**Hacemos las comprobacion si los datos del formulario son validos */
+  if(myForm.valid == true){
     const FechaNow = Date.now();
     this.curso.fecha = FechaNow;
 
     /*Enviamos al metodo addCurso de nuestro Service (curso.Servise) la propiedad curso*/
     this.cursoService.addCursos(this.curso);
-  }
+    /**Reseteamos el formulario */
+    myForm.resetForm();
+    let a = "Añadido Correctamente";
+    this.cursoService.getMessage(a);
 
+  }else{
+        let a = "Complete los campos del Formulario";
+        this.cursoService.getMessage(a);
+    }
+  }
 
 }

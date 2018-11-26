@@ -17,7 +17,8 @@ export class CursoService {
   constructor(public afs: AngularFirestore) {
     // this.cursos = afs.collection('cursos').valueChanges();
     /** Todo se encuentra en angularFire2 documentacion para obtener datos*/
-    this.cursosCollection = afs.collection<CursoInterface>('cursos');
+    /**Con ref como segundo parametro enviamos los datos ordenados de manera ascendente */
+    this.cursosCollection = afs.collection<CursoInterface>('cursos' , ref => ref.orderBy('fecha', 'desc'));
     this.cursos = this.cursosCollection.snapshotChanges().pipe(
         map(actions => actions.map(a => {
           const data = a.payload.doc.data() as CursoInterface;
@@ -52,5 +53,9 @@ export class CursoService {
      */
     this.cursoDoc = this.afs.doc(`cursos/${curso.id}`);
     this.cursoDoc.update(curso);
+  }
+
+  getMessage(message){
+      return message;
   }
 }
