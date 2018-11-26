@@ -8,6 +8,7 @@ import { AngularFireModule } from 'angularfire2';
 
 import { FormsModule } from '@angular/forms';
 import { CursoService } from './Services/curso.service';
+import { ToasterServiceService } from './Services/toaster-service.service'
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -29,7 +30,7 @@ import { FooterComponent } from './footer/footer.component';
     AngularFirestoreModule,
     FormsModule
   ],
-  providers: [CursoService],
+  providers: [CursoService, ToasterServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
